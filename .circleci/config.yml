@@ -1,0 +1,16 @@
+version: 2.1
+orbs:
+  snyk: snyk/snyk@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.4.0
+    steps:
+      - checkout
+      - run: npm ci
+      - snyk/scan
+workflows:
+  test-dependencies:
+    jobs:
+      - build
+
